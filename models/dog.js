@@ -6,7 +6,12 @@ module.exports = (sequelize, DataTypes) => {
   class Dog extends Model {
     static associate(models) {
       Dog.belongsTo(models.Profile, {
-        foreignKey: 'profileId'
+        foreignKey: 'ownerId'
+      })
+      Dog.belongsToMany(models.Profile, {
+        as: 'families',
+        foreignKey: 'familyId',
+        through: models.FamilyDog
       })
     }
   }
