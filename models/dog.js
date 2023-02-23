@@ -5,8 +5,8 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Dog extends Model {
     static associate(models) {
-      Dog.belongsTo(models.Family, {
-        foreignKey: 'familyId'
+      Dog.belongsTo(models.Profile, {
+        foreignKey: 'profileId'
       })
     }
   }
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       onDelete: 'CASCADE',
       references: {
-        model: 'Families',
+        model: 'Profiles',
         key: 'id'
       }
     }

@@ -2,22 +2,22 @@
 const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
-  class Family extends Model {
+  class Profile extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Family.belongsTo(models.User, { foreignKey: 'userId' })
-      Family.hasMany(models.Dog, {
+      Profile.belongsTo(models.User, { foreignKey: 'userId' })
+      Profile.hasMany(models.Dog, {
         foreignKey: 'familyId',
         as: 'dogs'
       })
     }
   }
 
-  Family.init({
+  Profile.init({
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
   },
   {
     sequelize,
-    modelName: 'Family',
+    modelName: 'Profile',
   })
-  return Family
+  return Profile
 }
