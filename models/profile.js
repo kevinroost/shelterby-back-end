@@ -27,7 +27,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    photo: DataTypes.STRING,
+    lastName: {
+      type: DataTypes.STRING,
+    },
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -37,6 +39,16 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id',
       },
     },
+    children: {
+      type: DataTypes.INTEGER,
+      min: 0
+    },
+    backyard: {
+      type: DataTypes.ENUM('None', 'Open', 'Fenced'),
+    },
+    about: {
+      type: DataTypes.STRING
+    }
   },
   {
     sequelize,
