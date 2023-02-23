@@ -12,6 +12,18 @@ async function createDog(req, res) {
   }
 }
 
+async function editDog (req, res) {
+  try {
+    const dog = await Dog.findByPk(req.params.id)
+    dog.set(req.body)
+    dog.save()
+    res.status(200).json(dog)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error)
+  }
+}
+
 async function addPhoto(req, res) {
   try {
     const imageFile = req.files.photo.path
@@ -34,4 +46,5 @@ async function addPhoto(req, res) {
 module.exports = {
   createDog,
   addPhoto,
+  editDog,
 }

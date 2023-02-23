@@ -14,7 +14,6 @@ async function index(req, res) {
 async function editProfile(req, res) {
   try {
     const profile = await Profile.findByPk(req.params.id)
-    console.log('req.body', req.body);
     profile.set(req.body)
     profile.save()
     res.status(200).json(profile)
