@@ -11,6 +11,19 @@ async function index(req, res) {
   }
 }
 
+async function editProfile(req, res) {
+  try {
+    const profile = await Profile.findByPk(req.params.id)
+    console.log('req.body', req.body);
+    profile.set(req.body)
+    profile.save()
+    res.status(200).json(profile)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ err: error })
+  }
+}
+
 async function addPhoto(req, res) {
   try {
     const imageFile = req.files.photo.path
@@ -28,4 +41,8 @@ async function addPhoto(req, res) {
   }
 }
 
-module.exports = { index, addPhoto }
+module.exports = {
+  index, 
+  addPhoto,
+  editProfile,
+}
