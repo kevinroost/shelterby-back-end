@@ -25,6 +25,17 @@ async function editDog (req, res) {
   }
 }
 
+async function indexDogs(req, res) {
+  try {
+    const dogs = await Dog.findAll()
+    console.log(dogs);
+    res.status(200).json(dogs)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error)
+  }
+}
+
 // async function indexListedDogs(req, req) {
 
 // }
@@ -64,4 +75,5 @@ module.exports = {
   addPhoto,
   editDog,
   delete: deleteDog,
+  indexDogs
 }

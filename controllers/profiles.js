@@ -3,8 +3,34 @@ const cloudinary = require('cloudinary').v2
 
 async function index(req, res) {
   try {
-    const profiles = await Profile.findAll()
+    const profiles = await Profile.findAll(
+      {
+        include: [
+          {
+            model: Dog, 
+            as: "listedDogs"
+          },
+          {
+            model: Dog, 
+            as: "futureDogs", 
+            through: {
+              // attributes: [],
+            }
+          }
+        ]
+      }
+    )
     res.json(profiles)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ err: error })
+  }
+}
+
+async function viewProfile(req, res) {
+  try {
+    const profile = await Profile.findByPk(req.params.id)
+    res.status(200).json(profile)
   } catch (error) {
     console.log(error)
     res.status(500).json({ err: error })
@@ -53,9 +79,25 @@ async function associateDog(req, res) {
   }
 }
 
+async function deleteDogAssociation(req, res) {
+  try {
+    const rowsRemoved = await FamilyDog.destroy({
+      where: { 
+        id: req.params.futureDogId
+      }
+    })
+    res.status(200).json(rowsRemoved)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error)
+  }
+}
+
 module.exports = {
   index, 
   addPhoto,
   editProfile,
   associateDog,
+  deleteDogAssociation,
+  viewProfile
 }

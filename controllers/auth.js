@@ -34,8 +34,9 @@ async function login(req, res) {
   try {
     const user = await User.findOne({
       where: { email: req.body.email },
-      include: { model: Profile, as: 'profile', attributes: ['id'] },
+      include: { model: Profile, as: 'profile'},
     })
+    console.log(user);
     if (!user) return res.status(401).json({ err: 'User not found' })
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (isMatch) {
