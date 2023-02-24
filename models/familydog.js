@@ -10,12 +10,27 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
     }
   }
   FamilyDog.init({
-    dogId: DataTypes.INTEGER,
-    familyId: DataTypes.INTEGER
+    dogId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Dogs',
+        key: 'id'
+      }
+    },
+    familyId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Profiles',
+        key: 'id'
+      }
+    }
   }, {
     sequelize,
     modelName: 'FamilyDog',

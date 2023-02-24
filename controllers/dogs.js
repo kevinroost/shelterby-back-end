@@ -4,6 +4,7 @@ const cloudinary = require('cloudinary').v2
 async function createDog(req, res) {
   try {
     req.body.ownerId = req.user.profile.id
+    console.log(req.user);
     const dog = await Dog.create(req.body)
     res.status(200).json(dog)
   } catch (error) {
@@ -24,6 +25,10 @@ async function editDog (req, res) {
   }
 }
 
+// async function indexListedDogs(req, req) {
+
+// }
+
 async function addPhoto(req, res) {
   try {
     const imageFile = req.files.photo.path
@@ -41,10 +46,22 @@ async function addPhoto(req, res) {
   }
 }
 
+async function deleteDog(req, res) {
+  try {
+    const rowsRemoved = await Dog.destroy({
+      where: { id: req.params.id}
+    })
+    res.status(200).json(rowsRemoved)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error)
+  }
+}
 
 
 module.exports = {
   createDog,
   addPhoto,
   editDog,
+  delete: deleteDog,
 }

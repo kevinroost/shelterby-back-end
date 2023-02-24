@@ -1,4 +1,4 @@
-const { Profile } = require('../models')
+const { Profile, Dog, FamilyDog } = require('../models')
 const cloudinary = require('cloudinary').v2
 
 async function index(req, res) {
@@ -40,8 +40,22 @@ async function addPhoto(req, res) {
   }
 }
 
+async function associateDog(req, res) {
+  try {
+    const { profileId, dogId } = req.params
+    const association = await FamilyDog.create({
+      familyId: profileId, dogId: dogId
+    })
+    res.status(200).json(association)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error)
+  }
+}
+
 module.exports = {
   index, 
   addPhoto,
   editProfile,
+  associateDog,
 }

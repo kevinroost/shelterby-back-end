@@ -12,5 +12,6 @@ router.use(decodeUserFromToken)
 router.post('/', checkAuth, dogsCtrl.createDog)
 router.patch('/:id', checkAuth, dogsCtrl.editDog)
 router.put('/:id/add-photo', checkAuth, dogsCtrl.addPhoto)
+router.delete('/:id', checkAuth, dogsCtrl.delete)
 
 module.exports = router
