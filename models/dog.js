@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       })
       Dog.belongsToMany(models.Profile, {
         as: 'futureDogs',
-        foreignKey: 'familyId',
+        foreignKey: 'dogId',
         through: models.FamilyDog
       })
     }

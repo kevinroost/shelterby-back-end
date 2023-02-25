@@ -29,7 +29,9 @@ async function index(req, res) {
 
 async function viewProfile(req, res) {
   try {
-    const profile = await Profile.findByPk(req.params.id)
+    const profile = await Profile.findByPk(req.params.id, {
+      include: [{model: Dog, as: "listedDogs"}]
+    })
     res.status(200).json(profile)
   } catch (error) {
     console.log(error)
