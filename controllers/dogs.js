@@ -1,4 +1,4 @@
-const { Dog } = require('../models')
+const { Dog, Profile } = require('../models')
 const cloudinary = require('cloudinary').v2
 
 async function createDog(req, res) {
@@ -27,7 +27,19 @@ async function editDog (req, res) {
 
 async function indexDogs(req, res) {
   try {
-    const dogs = await Dog.findAll()
+    const dogs = await Dog.findAll(
+      {
+        include: [
+          {
+            model: Profile,
+            as: "futureFamilies",
+            through: {
+              attributes: []
+            }
+          }
+        ]
+      }
+    )
     console.log(dogs);
     res.status(200).json(dogs)
   } catch (error) {
@@ -49,7 +61,8 @@ async function addPhoto(req, res) {
       { tags: `${req.user.email}` }
     )
     dog.photo = image.url
-    await profile.save()
+    await dog.save()
+    console.log(dog);
     res.status(201).json(dog.photo)
   } catch (error) {
     console.log(error)

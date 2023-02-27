@@ -14,12 +14,13 @@ async function index(req, res) {
             model: Dog, 
             as: "futureDogs", 
             through: {
-              // attributes: [],
+              attributes: [],
             }
           }
         ]
       }
     )
+    console.log(profiles);
     res.json(profiles)
   } catch (error) {
     console.log(error)
@@ -30,7 +31,19 @@ async function index(req, res) {
 async function viewProfile(req, res) {
   try {
     const profile = await Profile.findByPk(req.params.id, {
-      include: [{model: Dog, as: "listedDogs"}]
+      include: [
+        {
+          model: Dog, 
+          as: "listedDogs"
+        },
+        {
+          model: Dog, 
+          as: "futureDogs", 
+          through: {
+            attributes: [],
+          }
+        }
+      ]
     })
     res.status(200).json(profile)
   } catch (error) {
@@ -94,6 +107,7 @@ async function deleteDogAssociation(req, res) {
     res.status(500).json(error)
   }
 }
+
 
 module.exports = {
   index, 

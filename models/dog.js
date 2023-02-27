@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'ownerId'
       })
       Dog.belongsToMany(models.Profile, {
-        as: 'futureDogs',
+        as: 'futureFamilies',
         foreignKey: 'dogId',
         through: models.FamilyDog
       })

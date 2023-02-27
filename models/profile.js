@@ -44,9 +44,15 @@ module.exports = (sequelize, DataTypes) => {
       min: 0
     },
     backyard: {
-      type: DataTypes.ENUM('None', 'Open', 'Fenced'),
+      type: DataTypes.ENUM('None', 'open', 'fenced'),
     },
     about: {
+      type: DataTypes.STRING
+    },
+    phoneNumber: {
+      type: DataTypes.STRING
+    },
+    email: {
       type: DataTypes.STRING
     }
   },
