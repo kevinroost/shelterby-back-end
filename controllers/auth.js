@@ -13,6 +13,7 @@ async function signup(req, res) {
       req.body.userId = user.id
       const profile = await Profile.create(req.body)
       profile.lastName = `${user.name}'s Family`
+      profile.email = user.email
       user.dataValues.profile = { id: profile.dataValues.id }
       const token = createJWT(user)
       res.status(200).json({ token })
