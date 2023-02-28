@@ -14,6 +14,6 @@ router.get('/:id', checkAuth, profilesCtrl.viewProfile)
 router.post('/:profileId/futureDogs/:dogId', profilesCtrl.associateDog)
 router.patch('/:id', checkAuth, profilesCtrl.editProfile)
 router.put('/:id/add-photo', checkAuth, profilesCtrl.addPhoto)
-router.delete('/:futureDogId', checkAuth, profilesCtrl.deleteDogAssociation)
+router.delete('/:profileId/futureDogs/:dogId', checkAuth, profilesCtrl.deleteDogAssociation)
 
 module.exports = router

@@ -10,6 +10,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.removeColumn('Profiles', 'backyard')
+    await queryInterface.changeColumn('Profiles', 'backyard', {type: Sequelize.STRING})
   }
 };

@@ -98,7 +98,8 @@ async function deleteDogAssociation(req, res) {
   try {
     const rowsRemoved = await FamilyDog.destroy({
       where: { 
-        id: req.params.futureDogId
+        dogId: req.params.dogId,
+        familyId: req.params.profileId
       }
     })
     res.status(200).json(rowsRemoved)
