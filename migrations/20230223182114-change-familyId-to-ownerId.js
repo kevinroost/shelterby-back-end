@@ -7,7 +7,7 @@ module.exports = {
   },
   
   async down (queryInterface, Sequelize) {
-    await queryInterface.renameColumn('Families', 'ownerId', 'familyId', { type: Sequelize.STRING })
+    await queryInterface.renameColumn('Profiles', 'ownerId', 'familyId', { type: Sequelize.STRING })
 
   }
 };

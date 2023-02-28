@@ -3,11 +3,11 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.removeColumn('Families', 'photo')
+    await queryInterface.removeColumn('Profiles', 'photo')
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.addColumn('Families', 'photo')
+    await queryInterface.addColumn('Profiles', 'photo')
 
   }
 };
