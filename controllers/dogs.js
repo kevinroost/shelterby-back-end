@@ -58,7 +58,7 @@ async function addPhoto(req, res) {
     const dog = await Dog.findByPk(req.params.id)
     const image = await cloudinary.uploader.upload(
       imageFile, 
-      { tags: `${req.user.email}` }
+      { tags: `${req.user.email}`, format: 'webp'}
     )
     dog.photo = image.url
     await dog.save()
