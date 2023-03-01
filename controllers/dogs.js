@@ -4,8 +4,29 @@ const cloudinary = require('cloudinary').v2
 async function createDog(req, res) {
   try {
     req.body.ownerId = req.user.profile.id
-    console.log(req.user);
     const dog = await Dog.create(req.body)
+    res.status(200).json(dog)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error)
+  }
+}
+
+async function getDog (req, res) {
+  try {
+    const dog = await Dog.findByPk(req.params.id,
+      {
+        include: [
+          {
+            model: Profile,
+            as: "futureFamilies",
+            through: {
+              attributes: []
+            }
+          }
+        ]
+      }
+    )
     res.status(200).json(dog)
   } catch (error) {
     console.log(error);
@@ -58,7 +79,10 @@ async function addPhoto(req, res) {
     const dog = await Dog.findByPk(req.params.id)
     const image = await cloudinary.uploader.upload(
       imageFile, 
-      { tags: `${req.user.email}`, format: 'webp'}
+      { tags: `${req.user.email}`, 
+        format: 'webp',
+
+      }
     )
     dog.photo = image.url
     await dog.save()
@@ -88,5 +112,6 @@ module.exports = {
   addPhoto,
   editDog,
   delete: deleteDog,
-  indexDogs
+  indexDogs,
+  getDog
 }

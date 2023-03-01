@@ -6,6 +6,7 @@ const { decodeUserFromToken, checkAuth } = middleware
 
 /*---------- Public Routes ----------*/
 router.get('/', dogsCtrl.indexDogs)
+router.get('/:id', dogsCtrl.getDog)
 
 
 /*---------- Protected Routes ----------*/
