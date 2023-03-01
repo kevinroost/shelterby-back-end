@@ -21,15 +21,16 @@ module.exports = {
       about: {
         type: Sequelize.STRING
       },
-      familyId: {
+      ownerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         onDelete: 'CASCADE',
         references: {
-          model: 'Families',
+          model: 'Profiles',
           key: 'id'
         }
       },
+      photo: Sequelize.STRING,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

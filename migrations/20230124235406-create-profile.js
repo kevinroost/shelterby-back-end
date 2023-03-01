@@ -13,7 +13,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      photo: Sequelize.STRING,
+      lastName: Sequelize.STRING,
+      children: Sequelize.INTEGER,
+      backyard:{
+        type: Sequelize.ENUM('open', 'fenced', 'none')
+      },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -23,6 +27,9 @@ module.exports = {
           key: 'id',
         },
       },
+      email: Sequelize.STRING,
+      phoneNumber: Sequelize.STRING,
+      about: Sequelize.STRING,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
